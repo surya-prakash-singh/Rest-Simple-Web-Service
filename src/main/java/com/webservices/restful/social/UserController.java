@@ -1,12 +1,14 @@
 package com.webservices.restful.social;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.Servlet;
-//import javax.validation.Valid;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -22,12 +24,16 @@ public class UserController {
     }
 
     @GetMapping(path = "/users/{id}")
-    public User getUserById(@PathVariable int id){
+    public Resource getUserById(@PathVariable int id){
         User usr = service.findById(id);
         if(usr == null){
             throw new UserNotFoundException("User Not Found");
         }
-        return service.findById(id);
+        Resource<User> resource = new Resource<User>(usr);
+        ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).getUsers());
+
+        resource.add(linkTo.withRel("all-users"));
+        return resource;
     }
 
     @GetMapping(path = "/delete/{id}")
@@ -41,7 +47,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/createUser")
-    public ResponseEntity createUser(@RequestBody User usr){
+    public ResponseEntity createUser(@Valid @RequestBody User usr){
 
 
         User savedUsr = service.saveUser(usr);

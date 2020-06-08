@@ -1,8 +1,9 @@
-package com.handlers.exceptions;
+package com.webservices.restful.social.exceptions;
 
 import java.util.Date;
 
 import com.webservices.restful.social.UserNotFoundException;
+import com.webservices.restful.social.exceptions.ExceptionResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

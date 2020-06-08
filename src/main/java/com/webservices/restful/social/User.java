@@ -1,16 +1,16 @@
 package com.webservices.restful.social;
 
-//import javax.validation.constraints.Past;
-//import javax.validation.constraints.Size;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
 public class User {
 
     private Integer id;
-//    @Size(min=2)
+    @Size(min=2, message = "Name should have atleast 2 characters")
     private String name;
-//    @Past
+    @Past
     private Date dateofbirth;
     private List<Post> posts;
 
