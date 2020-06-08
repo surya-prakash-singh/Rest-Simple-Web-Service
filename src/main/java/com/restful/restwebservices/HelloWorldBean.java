@@ -1,9 +1,5 @@
 package com.restful.restwebservices;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-
-//@Component
 public class HelloWorldBean {
     private String Message;
 
